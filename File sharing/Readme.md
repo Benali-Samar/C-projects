@@ -1,11 +1,17 @@
 
+
+	# use flock for locking 
 	In here you find the locks of file sharing demo using flocks
 	on a file containing a value 100 and than process A read that value
 	and minus -20 of it and B reads that file and it find that the value
 	is still 100 because of retarding updating so flocks just reserve the 
 	file untill it ends its processing and than liberating it for other 
-	processes.
+	processes.	
 
+
+# "lslocks" command for viewing all locked files:
+	FLOCK: by flock syscall
+	POSIX: by lokf,fcntl syscalls 
 
 *A producer should gain an exclusive lock on the file before writing to the file. An exclusive lock can be held by one process at most, which rules out a race condition because no other process can access the file until the lock is released.
 
