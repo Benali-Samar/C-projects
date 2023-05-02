@@ -1,0 +1,1 @@
+cmd_/home/samar.benali@sofia.local/Documents/SelfWork/vmalloc/Module.symvers := sed 's/ko$$/o/' /home/samar.benali@sofia.local/Documents/SelfWork/vmalloc/modules.order | scripts/mod/modpost -m -a  -o /home/samar.benali@sofia.local/Documents/SelfWork/vmalloc/Module.symvers -e -i Module.symvers   -T -

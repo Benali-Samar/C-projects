@@ -1,0 +1,1 @@
+cmd_/home/samar.benali@sofia.local/Documents/SelfWork/vmalloc/vmalloc.ko := ld -r -m elf_x86_64 -z noexecstack --build-id=sha1  -T scripts/module.lds -o /home/samar.benali@sofia.local/Documents/SelfWork/vmalloc/vmalloc.ko /home/samar.benali@sofia.local/Documents/SelfWork/vmalloc/vmalloc.o /home/samar.benali@sofia.local/Documents/SelfWork/vmalloc/vmalloc.mod.o;  true

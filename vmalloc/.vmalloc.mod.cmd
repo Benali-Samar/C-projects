@@ -1,0 +1,1 @@
+cmd_/home/samar.benali@sofia.local/Documents/SelfWork/vmalloc/vmalloc.mod := printf '%s\n'   vmalloc.o | awk '!x[$$0]++ { print("/home/samar.benali@sofia.local/Documents/SelfWork/vmalloc/"$$0) }' > /home/samar.benali@sofia.local/Documents/SelfWork/vmalloc/vmalloc.mod
