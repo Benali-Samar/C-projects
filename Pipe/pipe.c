@@ -7,6 +7,15 @@
 #define P_LENGTH 4
 #define P_WAIT_INTERVAL 2
 
+
+//********
+//* PIPE usage
+//* Child creation using fork ()
+//* Read/write the PIN
+///********
+
+
+
 // continously creates a child process and generates p in it and sends the p to the parent using pipe
 void getP(char p[P_LENGTH +1])
 {
