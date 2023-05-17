@@ -1,4 +1,4 @@
-#mmap() function test
+#mmap() function test:
 
 mmap, munmap ==> mapping/unmapping for device files.
 
@@ -7,7 +7,7 @@ The specified arguments are described in the comments in the mmap.c
 
 #How to ?
 
-Just compile the code by gcc mmap.c -o mmap
+Just compile the code by: gcc mmap.c -o mmap
 
 Excute it and pass the arguments by : ./mmap read.txt 0 10
 
