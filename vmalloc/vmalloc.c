@@ -4,8 +4,13 @@
 
 /*
 	* This module is a vmalloc implementation that is used for kernel allocation memory
-	* vmalloc is used when allocating a variable sized blocks of memory unlike of the 
-	* kmalloc that is used for small,fixed-size blocks.  
+	* vmalloc is used when allocating a variable sized blocks of virtual memory unlike of the 
+	* kmalloc that is used for small,fixed-size blocks in physical memeory.
+	* Kmalloc sythaxe: void *kmalloc(size_t size, int flags);
+	* kmalloc have the parametre flags that is the allocation flag that controle the behavior, the most commonly used flag is
+	* "GFP_KERNEL" it meansthat the alllocation is performed on behalf of a process running in the kernel space... 
+	* kmalloc is most used in LDD and DMA operations rather than vmalloc.
+	
  */
 
 MODULE_LICENSE("GPLv2+");
