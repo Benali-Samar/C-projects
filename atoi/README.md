@@ -7,6 +7,7 @@ argument to an integer.
 #How to :
 
 Compile the code with : gcc atoi.c -o atoi
+
 Execute it by: ./atoi "156"
 
 You will see the output : " Your number is 156"
