@@ -22,13 +22,12 @@ int c_atoi(const char *str)
 	while(((str[i] <= 13 && str[i] >= 9) || str[i] == 32) && str[i] != '\0')
 		i++;
 
-	//Negatif
+
 	if (str[i] =='-')
 	{
 		sign = -1;
 		i++;
 	}
-	//Positif
 	else if (str[i] =='+')
 	{
 		sign = 1;
@@ -65,7 +64,6 @@ int main (int argc, char **argv)
 		printf("Your number is %d\n", c_atoi(argv[1]));
 		return 0;
 	}
-
 	printf("Wrong number of parametres \n");
 	return 1;
 
