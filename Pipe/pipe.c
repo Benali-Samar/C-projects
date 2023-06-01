@@ -31,49 +31,49 @@ void getP(char p[P_LENGTH +1])
 
 
 int main(void) {
-	while(1)
-	{
+
 	int pipefds[2];    //creating a pipes
 	char buf[P_LENGTH +1];       // buffer for the reading
 	char p[P_LENGTH + 1 ] ;
 
 	pipe(pipefds);
 
-	pid_t pid = fork(); // creates child process
-	if (pid == 0)
+	for ( int i =0 ; i<4; i++)
 	{
-	getP(p);
-	close(pipefds[0]);
-	write (pipefds[1],p, P_LENGTH +1 ); //writes p to pipe
 
-	printf("Sending p from child to parent ...\n");
-	sleep(P_WAIT_INTERVAL);
-	exit (EXIT_SUCCESS);
+		pid_t pid = fork(); // creates child process
+		if (pid == -1)
+		{
+			perror("fork");
+			return 1;
+		}
+		else if (pid == 0)
+		{ // the child process
+		getP(p);
+		close(pipefds[0]);
+		write (pipefds[1],p, P_LENGTH +1 ); //writes p to pipe
+		printf("Hello from child process! child PID: %d\n", getpid());
+
+		printf("Sending p from child to parent ...\n");
+		sleep(P_WAIT_INTERVAL);
+		exit (EXIT_SUCCESS);
+		}
+
 	}
 
-
-	if (pid > 0)
-	{
-	wait (NULL);
 	close(pipefds[1]);
 	read(pipefds[0],buf,P_LENGTH + 1); //read p from pipe
 	close(pipefds[0]);
 
+
+	for (int i=0;i<4;i++)
+	{
+		wait(NULL);
+	}
+
+	printf("Hello from the parent process! Parent PID: %d\n", getpid());
 	printf("Parent recieving p '%s' \n", buf);
-	}
-	}
-//	printf("Writing p to pipe ... \n");
-//	write(pipefds[1],p,5); //it writes the 5  characters to the pipe
-//	printf("Done writing \n\n");
 
-//	printf("Reading p from pip ... \n");
-//	read(pipefds[0],buf,5); // reads them from the pip  and for displaying using buffer
-//	printf("Done reading \n\n");
-
-//	printf("P from pipe : %s \n", buf);
-
-//	printf("Read fd value : %d \n", pipefds[0]);
-//	printf("Write fd value : %d \n", pipefds[1]);
 
 	return EXIT_SUCCESS;
 }
