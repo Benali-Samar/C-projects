@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//This code uses "getenv" function that takes an envirement variable as a parametre and returns its content.
+//This code uses "getenv" function that takes an enviremental variable as a parametre and returns its content, like HOME or PATH enviremental variables.
 
 int main (int argc, char *argv[])
 {
