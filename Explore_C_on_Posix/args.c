@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 //This prog converts the number passed by the arguments to an int or a float.
-// the arguments of main are:
+// the arguments are passed by the command line to the main:
 // argc = is the arguments counter and it starts with 0 is the name of the program itself(exp : ./args)
 // argv[] = is the array of arguments passed to the program.
 // strtol and strtof : two functions to convert to int(strtol) and float(strtof).
