@@ -6,6 +6,7 @@
 //This code assign a new envirenmental variable with "putenv" and "setenv" functions that it is allocated with malloc.
 //setenv(): This function sets the value of an environmental variable or creates a new one if it doesn't exist.
 //          If the variable already exists, the function updates its value.
+
 //putenv(): This function sets the value of an environmental variable or creates a new one if it doesn't exist. However,unlike setenv,
 //          if the variable already exists, the function replaces its value without updating the value of any other copies of the variable.
 
