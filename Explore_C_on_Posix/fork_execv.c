@@ -12,19 +12,29 @@
 //	}
 
 
-//A fork system call is called than we use execv() to make the child process runs the vim program
-//but it won't because the argv is wrong.
+//------execv() VS execvp():-------
+//Both of them do the same functionality of the family exec*, but the only difference is that
+//execv; requires the full path of the executable file and an array of string arguments.
+//Unlike execvp; that allows you to specify the executable file using only its name and the array of string arguments.
+
+
+//A fork system call is called than we use execv() to make the child process runs the ls program,
+//In the child process, the execv() system call is used to replace the child process
+// image with the "ls" program image.
+//Meanwhile, the parent process continues executing and waits for the child process to
+//finish executing using the 'wait(NULL)' system call.
+
 int main()
 {
 	int f = fork();
-	char * argv[] = {"vim" , "file.c" , "file.h" , NULL};
+	char * argv[] = {"ls" , "." , NULL};
 	switch (f)
 	{
 	case -1:
 		printf("Error while forking!\n");
 		break;
 	case 0:
-		execv("/usr/bin/vim" , argv);
+		execv("/usr/bin/ls" , argv);
 		puts("Problem: it shouldn't be executed!\n");
 		break;
 	default:
@@ -37,3 +47,29 @@ int main()
 
 	return 0;
 }
+
+
+//A simplified diagram to present the described code in background:
+
+//       +-----------------------+
+//       |       Parent          |
+//       |   Process (PID: P)    |
+//       +-----------------------+
+//                 |
+//                 | Fork()
+//                 |
+//       +-----------------------+
+//       |       Parent          |
+//       |   Process (PID: P)    |
+//       |    (Continues)        |
+//       +-----------------------+
+//                 |
+//                 | Child Process
+//                 | (PID: C)
+//                 | Execv("/usr/bin/ls", argv)
+//                 |
+//       +-----------------------+
+//       |       Child           |
+//       |   Process (PID: C)    |
+//       |   (Executes ls)       |
+//       +-----------------------+
