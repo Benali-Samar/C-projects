@@ -4,8 +4,16 @@
 #include <sys/types.h>
 
 
-//A fork system call is called than we use execv() to make the child process runs the vim program ...
-// ----- TO continuuueee! ----
+// execvp example: Execute a commande with execvp passing by the arguments commands
+// with its parametres, example : ./execvp ls -l Documents
+//	int main(int argc, char *argv[]) {
+// 	argv++;
+//	return execvp(argv[0] , argv);
+//	}
+
+
+//A fork system call is called than we use execv() to make the child process runs the vim program
+//but it won't because the argv is wrong.
 int main()
 {
 	int f = fork();
