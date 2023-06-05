@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include <sys/wait.h>
 #include <sys/types.h>
 
@@ -32,11 +33,11 @@ int main()
 	{
 	case -1:
 		printf("Error while forking!\n");
-		break;
+		exit(EXIT_FAILURE);
 	case 0:
 		execv("/usr/bin/ls" , argv);
 		puts("Problem: it shouldn't be executed!\n");
-		break;
+		exit(EXIT_FAILURE);
 	default:
 		printf("This is the parent %d, my parent is %d.\n", getpid(), getppid());
 		printf("My child is %d.\n", f);
