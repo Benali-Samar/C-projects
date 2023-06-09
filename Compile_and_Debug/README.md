@@ -71,16 +71,19 @@ Here is a diagram illustrating the compilation process with gcc:
         	       v
 	        +--------------+
 	        | Preprocessing|
+		|   file.i     |		
 	        +--------------+
 	               |
 	               v
 	        +--------------+
 	        | Compilation  |
+		|   file.s     |
 	        +--------------+
 	               |
 	               v
 	        +--------------+
 	        |   Assembly   |
+		|    file.o    |
 	        +--------------+
 	               |
 	               v
@@ -91,6 +94,7 @@ Here is a diagram illustrating the compilation process with gcc:
 	               v
 	        +--------------+
 	        |  Executable  |
+		|     file     |
 	        +--------------+
 
 
