@@ -7,7 +7,7 @@ This repo is just for the response of these questions:
 
 Just don't worry, those steps are a must :) 
 
-#Compile, how ?
+#	Compile, how ?
 
 For C language we have the celebrity GLIBC "Gnu Lib C", the C standart library that gave us the compilation tool "GCC".
 Glibc is the collections of files containing functions that are wrappers for the real system call functions.
@@ -55,6 +55,7 @@ The linker "ld" combines the object file "file.o" with other necessary object fi
 	$ gcc file.o -o file
 
 Here are some resources about linkers because it is so huge domaine:
+	
 	* https://sourceware.org/binutils/docs/ld/Scripts.html#Scripts
 	* https://www.wh0rd.org/books/linkers-and-loaders/linkers_and_loaders.pdf
 
@@ -90,17 +91,18 @@ Here is a diagram illustrating the compilation process with gcc:
 	        +--------------+
 
 
-#Debug, how ?
+#	Debug, how ?
 
 Congrats! you've compiled a program and all went good :) 
 
 But sometimes we be faced to problems, bugs that we need to debug and see the trace of the code while compiling ...
 Also to see where is the problem exaxtly and what part of the compilation steps is missing.
 
-Here you be in the phase "What the !!??" , don't pa,ic u just need to debug it and find a solution,
+Here you be in the phase "What the !!??" , don't panic u just need to debug it and find a solution,
 most errors are so simple to fix ;)
 
 There are different tools for debuging like GDB  "GnuDeBugger" ... (TO DO!)
+
 Also there is "strace" ans "ltrace", those two can help examin the compiled code.
 
 
@@ -114,7 +116,7 @@ Specify the problem and start looking for solution, you face another problem jus
 
 
 
-#Example:
+#	Example:
 
 As an example we have a simple hello world C code "syscall.c" that opens a file "test.txt" and reads 
 what's inside then prints it to the stdout and finally close that file.
