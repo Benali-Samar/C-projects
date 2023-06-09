@@ -1,8 +1,11 @@
 #			---------- Compile and Debug tools ----------
 
 This repo is just for the response of these questions:
+
 	- "How to compile this ?" 
+
 	- "Wait what the !!??"
+
 	- "Okay how to debug this shit ?" 
 
 Just don't worry, those steps are a must :) 
