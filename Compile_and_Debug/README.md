@@ -148,3 +148,45 @@ output:
 	+++ exited (status 0) +++
 
 It displays a set of userspace calls of a program, . The fopen function opens the given text file, the fgets function reads file content to the buf buffer, the puts function prints the buffer to stdout, and the fclose function closes the file given by the file descriptor.
+
+
+#	GDB
+The gnu debugger is the standard  GNU project for debbugging, it is mostly present in all unix like systems.
+It is used generally with C/C++ programs, but to display debugging informations you should compile withe the "-g" option!
+So you just need to :
+	$ gdb ./file
+
+For running the program with gdb you can type "run" or "start" to excute one line and keep typing "next" for continueing or "continue" or "step", also you can use "nexti" for assembly code.
+
+You can also put a break point with "break".
+You can display the source code by "list" command, or by "lay" command.
+GDB helps define and find bugs in c codes, for example we have this simple C code that is obviously buggy:
+
+	#include <stdio.h>
+	int main(){
+	int d=2;
+	printf("Give a number\n");
+	scanf("%d", d);
+	printf("You gave: %d\n",d);
+	return 0;
+	}
+
+This code if it runs it will give "SEGMENTATION FAULT" error because it does not know the d or its address in the scanf statement.
+With gdb at that line while we typed "8" we've got this:
+
+	8
+
+	Program received signal SIGSEGV, Segmentation fault.
+	0x00007ffff7c671c9 in __vfscanf_internal (s=<optimized out>, format=<optimized out>, argptr=argptr@entry=0x7fffffffdb10, mode_flags=mode_flags@entry=2) at ./stdio-common/vfscanf-internal.c:1896
+
+It says that is a "SIGSEGV" as we said earlier it is a segmentation fault.
+so when we want to see the assembly at that line : 
+	(gdb) x/i $pc
+	=> 0x7ffff7c671c9 <__vfscanf_internal+18281>:	mov    %edx,(%rax)
+It says that the content of the register rax is moved to the register edx, but when we type "info registers" to see those two registers we got that the "rax" register has 2 in it but the "edx" register has 8, so this is the error, the move instruction didn't executed because it has not the address of "d". 
+
+So to fixe that we should just change the scanf line with 
+	scanf("%d", &d);
+
+And that's all :) .
+
