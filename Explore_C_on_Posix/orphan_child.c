@@ -5,13 +5,13 @@
 
 //Here is an example with an orphan child process, an orphan process refers to a child process that
 //continues to run even after its parent process has finished or terminated.
-//When this happens,the orphaned child process is adopted by the init process (usually with process ID >
+//When this happens,the orphaned child process is adopted by the init process (usually with process ID
 
-//Orphan processes are adopted by the init process to ensure that they are not left as "zombie" process>
+//Orphan processes are adopted by the init process to ensure that they are not left as "zombie" process
 //which consume system resources without being properly cleaned up.
-//The init process becomes the new parent of the orphaned processes and takes responsibility for their >
+//The init process becomes the new parent of the orphaned processes and takes responsibility for their
 
-//Just be sure to handle child processes properly in your programs or scripts to avoid leaving orphan p>
+//Just be sure to handle child processes properly in your programs or scripts to avoid leaving orphan childs.
 //This typically involves implementing mechanisms to wait for child process completion,
 //handling signals, and properly terminating child processes before the parent process exits.
 
