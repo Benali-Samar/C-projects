@@ -1,6 +1,7 @@
 // This manipulation was for exploring how "vDSO" is used with ready syscalls like in this example is date.
 // VDSO is a shared library mapped into the address space of every user-spce process (in the place of vsyscall)
-
+// You can look for the vdso with:
+//	 ldd /bin/uname
 #include <sys/time.h>
 #include <stdio.h>
 #include <time.h>
