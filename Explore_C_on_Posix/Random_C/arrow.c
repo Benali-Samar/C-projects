@@ -40,6 +40,12 @@ int main ()
 	printf("Name : %s \n", M->name);
 	printf("ACC : %s \n", M-> ACC);
 	return 0;
+
+// so basically (*m).name == m -> name 
+  // it means the contente of the name field in the m struct becaus it has a pointer to it
+
+
+
 }
 
 
