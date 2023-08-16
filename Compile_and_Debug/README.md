@@ -190,3 +190,6 @@ So to fixe that we should just change the scanf line with
 
 And that's all :) .
 
+
+# Valgrind
+To DO!!!
