@@ -1,3 +1,8 @@
+//Linked lists example for learn: it is like a group of islands and i want to reach them one by one,also tried to insert a new island ... 
+//The islands names seems to be is a file which we don't know how much islands we have,so used dynamic allocation..
+//
+//Also used the "strdup()" function to make a copy of the struct whenever a new island is inserted 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
