@@ -201,13 +201,13 @@ Usually memory leak takes an achingly long time to track, Using dynamic allocati
 Valgrind is a tool used on Linux operating system to help tracking allocated memory on the heap. 
 It tracks the calls of malloc() and free() in your code and replace them with its own version of these functions, the valgrind version for malloc() will take note of wich piece of code is calling it and which piece of memory it allocated. It report back any data that was left on the heap at the end of the program.
 
-For using valdgrind first install it, and you need to make sure your executable contains "Debug information" using the "-g" option while compiling. For example we have the "spies.c" code that dynamically allocated memory using malloc(). 
+For using valdrind first install it, and you need to make sure your executable contains "Debug information" using the "-g" option while compiling. For example we have the "spies.c" code that dynamically allocated memory using malloc(). 
 
     $ sudo apt install valgring
     $ gcc -g spies.c -o spies
     $ valgring --leak-chek=full ./spies
 
-This will give us this report that said we have 1 block with 19 bytes left on the heap!
+It will give this report that showing we have 1 block with 19 bytes left on the heap!
 
     ==313731== Memcheck, a memory error detector
     ==313731== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
