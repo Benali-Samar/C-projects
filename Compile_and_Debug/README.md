@@ -181,15 +181,107 @@ With gdb at that line while we typed "8" we've got this:
 
 It says that is a "SIGSEGV" as we said earlier it is a segmentation fault.
 so when we want to see the assembly at that line : 
-	(gdb) x/i $pc
+
+    (gdb) x/i $pc
 	=> 0x7ffff7c671c9 <__vfscanf_internal+18281>:	mov    %edx,(%rax)
+
 It says that the content of the register rax is moved to the register edx, but when we type "info registers" to see those two registers we got that the "rax" register has 2 in it but the "edx" register has 8, so this is the error, the move instruction didn't executed because it has not the address of "d". 
 
 So to fixe that we should just change the scanf line with 
-	scanf("%d", &d);
+
+    scanf("%d", &d);
 
 And that's all :) .
 
 
 # Valgrind
-To DO!!!
+
+Usually memory leak takes an achingly long time to track, Using dynamic allocation can be really dangerous and bug nightmares for developers specially in limited resources platforms.
+
+Valgrind is a tool used on Linux operating system to help tracking allocated memory on the heap. 
+It tracks the calls of malloc() and free() in your code and replace them with its own version of these functions, the valgrind version for malloc() will take note of wich piece of code is calling it and which piece of memory it allocated. It report back any data that was left on the heap at the end of the program.
+
+For using valdgrind first install it, and you need to make sure your executable contains "Debug information" using the "-g" option while compiling. For example we have the "spies.c" code that dynamically allocated memory using malloc(). 
+
+    $ sudo apt install valgring
+    $ gcc -g spies.c -o spies
+    $ valgring --leak-chek=full ./spies
+
+This will give us this report that said we have 1 block with 19 bytes left on the heap!
+
+    ==313731== Memcheck, a memory error detector
+    ==313731== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+    ==313731== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+    ==313731== Command: ./spies
+    ==313731== 
+    Does suspect have a mustache? (y/n): n
+    Loretta Barnsworth? (y/n): n
+    Who's the suspect? Hayden Fantucci
+    Give me a question that is TRUE for Hayden Fantucci
+     but not for Loretta Barnsworth? Has a facial scar
+    Run again? (y/n): n
+    ==313731== 
+    ==313731== HEAP SUMMARY:
+    ==313731==     in use at exit: 19 bytes in 1 blocks
+    ==313731==   total heap usage: 13 allocs, 12 frees, 2,287 bytes allocated
+    ==313731== 
+    ==313731== 19 bytes in 1 blocks are definitely lost in loss record 1 of 1
+    ==313731==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+    ==313731==    by 0x491D60E: strdup (strdup.c:42)
+    ==313731==    by 0x1092A6: create (spies.c:27)
+    ==313731==    by 0x10938C: main (spies.c:52)
+    ==313731== 
+    ==313731== LEAK SUMMARY:
+    ==313731==    definitely lost: 19 bytes in 1 blocks
+    ==313731==    indirectly lost: 0 bytes in 0 blocks
+    ==313731==      possibly lost: 0 bytes in 0 blocks
+    ==313731==    still reachable: 0 bytes in 0 blocks
+    ==313731==         suppressed: 0 bytes in 0 blocks
+    ==313731== 
+    ==313731== For lists of detected and suppressed errors, rerun with: -s
+    ==313731== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+
+Those 19 bytes were allocated but not freed, looks like we allocated new pieces of memory 11 times but freed only 10 of them.
+
+To solve this we need to answer these four questions: 
+
+    1- How many pieces of data were left on the heap? 
+    2- What was the piece of data left on the heap?
+    3- Which line or lines of code caused the leak?
+    4- How do you plug the leak?
+
+It seems that:
+1- There is one piece of data.
+
+2- The string "Loretta barnsworth" it is 18 character with a string terminator become 19 bytes.
+
+3- The create() functions themeselves don't cause the leak because they didn't on the first pass, so it must be this strdup() line: "current -> question = strdup(question);"
+
+4- It is already pointing to something on the heap, it should be freed before re-allocating a new question with "free(current -> question);"
+
+If you re-test after the fix you'll see that the leak is fixed:
+
+    
+    ==314365== Memcheck, a memory error detector
+    ==314365== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+    ==314365== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+    ==314365== Command: ./spies
+    ==314365== 
+    Does suspect have a mustache? (y/n): n
+    Loretta Barnsworth? (y/n): n
+    Who's the suspect? Hayden Fantucci
+    Give me a question that is TRUE for Hayden Fantucci
+     but not for Loretta Barnsworth? Has a facial scar
+    Run again? (y/n): n
+    ==314365== 
+    ==314365== HEAP SUMMARY:
+    ==314365==     in use at exit: 0 bytes in 0 blocks
+    ==314365==   total heap usage: 13 allocs, 13 frees, 2,287 bytes allocated
+    ==314365== 
+    ==314365== All heap blocks were freed -- no leaks are possible
+    ==314365== 
+    ==314365== For lists of detected and suppressed errors, rerun with: -s
+    ==314365== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+    
+
+
