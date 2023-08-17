@@ -1,6 +1,7 @@
 //A simple program to guess the spies using linked structured lists 
 //There is a memory leak in this code it is for test with valgrind ===> fixed here 
-// explain the fix: TO DO []
+//Explained in the readme!
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
