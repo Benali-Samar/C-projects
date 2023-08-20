@@ -8,7 +8,7 @@
 */
 
 
-void *thread(void *data)
+void *thread(void *data) // a main thread launched
 {
 	while(1)
 	{
@@ -22,7 +22,7 @@ int main (void)
 {
 	pthread_t th;
 	printf("This is the main programm\n");
-	pthread_create(&th, NULL, thread, NULL);
-	sleep(5);
+	pthread_create(&th, NULL, thread, NULL); // creates a thread to print the msg
+	sleep(5); // waits 5 seconds
 	return 0;
 }
