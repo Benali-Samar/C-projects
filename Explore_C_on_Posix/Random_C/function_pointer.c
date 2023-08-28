@@ -5,6 +5,7 @@
 
 
 // A simple usage of a functions pointers for learning purpose
+// Every function name is a pointer to the address of the function,but C havn't a type named function! so when we need to pass a function to a function for a specific purpose like here we use function poiners :) 
 
 int NUM_ADS = 4;
 char *ADS[] = {
