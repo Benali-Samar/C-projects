@@ -1,5 +1,9 @@
 /*
 *   Have you wondred someday how 'printf()' can accept all type of arguments ?
+*     like printf("hello"); or printf("%i",a); or pintf("%s","how?");
+*     it is literally implemented like this :
+*         int printf (const char * arg, ...);
+*         So those "..." are the unknown args that will be passed to the function.
 *   Weeell,yea there is special function used there that can accept an unknown arguments.
 *   It is called "Variadic function" it is included in 'stdarg.h' header file.
 *   You guessed it right! here is a simple examples using variadic func with explanation ;)
