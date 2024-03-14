@@ -1,3 +1,8 @@
+/*
+ * @brief: Malloc simple implementation for memory allocation just for fun ;)
+ */
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
