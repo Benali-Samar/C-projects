@@ -1,3 +1,9 @@
+/*
+ *@brief Serial communication using poll() instead of read()
+ * Basic simple send and recieve data over serial with poll to get data from 
+ * the character device whenever it is available.
+ */
+
 #include <iostream>
 #include <vector>
 #include <map>
