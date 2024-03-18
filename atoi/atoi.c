@@ -35,7 +35,7 @@ int c_atoi(const char *str)
 	}
 
 	//Iterates through all characters of input string
-	//and take ASKII character of corresponding digit and sub from '0' to get numerical value
+	//and take ASCII character of corresponding digit and sub from '0' to get numerical value
 	//and multiply by 10 to shuffle digits left to update running total
 	while (str[i] >= 48 && str[i] <= 57 && str[i] != '\0')
 	{
